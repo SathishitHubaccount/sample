@@ -9,6 +9,12 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/SathishitHubaccount/sample.git'
             }
         }
+        stage('Check Docker') {
+            steps {
+                bat 'docker --version'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 bat "docker build -t %DOCKER_IMAGE% ."
