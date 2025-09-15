@@ -22,10 +22,13 @@ pipeline {
         }
         stage('Run Docker Container') {
             steps {
-               powershell '''
-                        $container = docker ps -q --filter "name=python-app"
-                        if ($container) { docker stop $container } else { echo "Skipping" }
-                        '''
+                stage('Run Docker Container') {
+            steps {
+                bat "docker stop python-app || echo Skipping"
+                bat "docker rm python-app || echo No container to remove"
+                bat "docker run -d -p 5000:5000 --name python-app %DOCKER_IMAGE%"
+            }
+        }
 
             }
         }
