@@ -22,8 +22,6 @@ pipeline {
         }
         stage('Run Docker Container') {
             steps {
-                stage('Run Docker Container') {
-            steps {
                 bat "docker stop python-app || echo Skipping"
                 bat "docker rm python-app || echo No container to remove"
                 bat "docker run -d -p 5000:5000 --name python-app %DOCKER_IMAGE%"
@@ -32,5 +30,3 @@ pipeline {
 
             }
         }
-    }
-}
